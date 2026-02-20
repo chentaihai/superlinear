@@ -1,10 +1,22 @@
-# Prompt Library
+
+- [1. Prompt Library](#1-prompt-library)
+  - [1.1. Metadata](#11-metadata)
+  - [1.2. Usage](#12-usage)
+  - [1.3. Index](#13-index)
+  - [1.4. Prompt Template](#14-prompt-template)
+    - [1.4.1. ID: 1](#141-id-1)
+      - [1.4.1.1. Prompt (raw)](#1411-prompt-raw)
+      - [1.4.1.2. Example Input / Variables](#1412-example-input--variables)
+      - [1.4.1.3. Example Output (expected)](#1413-example-output-expected)
+      - [1.4.1.4. Notes / Iterations](#1414-notes--iterations)
+
+# 1. Prompt Library
 
 > A simple, consistent place to store current prompts.
 
 ---
 
-## Metadata
+## 1.1. Metadata
 
 - Owner: 
 - Created: 2026-02-20
@@ -13,7 +25,7 @@
 
 ---
 
-## Usage
+## 1.2. Usage
 
 1. Duplicate the Prompt Template for each prompt you store.
 2. Keep the Title, Purpose and Example sections updated.
@@ -21,7 +33,7 @@
 
 ---
 
-## Index
+## 1.3. Index
 
 | ID | Title | Tags | Last updated |
 |----|-------|------|--------------|
@@ -29,9 +41,9 @@
 
 ---
 
-## Prompt Template
+## 1.4. Prompt Template
 
-### ID: 1
+### 1.4.1. ID: 1
 
 - Title: Search Engine Query Bookmarklet
 - Tags: javascript, bookmarklet, search-engine, utility
@@ -43,17 +55,17 @@
 - Created: 2026-02-20
 - Updated: 2026-02-20
 
-#### Prompt (raw)
+#### 1.4.1.1. Prompt (raw)
 
 ```
 Please write a JavaScript function that captures the current search query from the URL of the search engine in the browser. The code should also be able to construct a new URL for an alternative search engine with the same query. As I want to deploy the JavaScript code in a bookmark (so it becomes a bookmarklet) in my browser, when clicked it opens up a new tab with the search query on an alternative search engine.
 ```
 
-#### Example Input / Variables
+#### 1.4.1.2. Example Input / Variables
 
 - Current URL: A search engine results page URL (e.g., `https://www.google.com/search?q=javascript+tutorial`)
 
-#### Example Output (expected)
+#### 1.4.1.3. Example Output (expected)
 
 ```javascript
 /**
@@ -151,10 +163,13 @@ function openInAlternativeSearchEngine(targetEngine = 'duckduckgo') {
 // javascript:(function(){const u=new URL(window.location.href);let q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('p')||u.searchParams.get('wd')||u.searchParams.get('text')||u.searchParams.get('search')||u.searchParams.get('s')||u.searchParams.get('term');if(q){const e=encodeURIComponent(q.trim());window.open('https://duckduckgo.com/?q='+e,'_blank');}else{alert('No search query found.');}})();
 ```
 
-#### Notes / Iterations
+#### 1.4.1.4. Notes / Iterations
 
 - v1: Initial prompt requesting a JavaScript function to capture search query from URL.
 - v2: Added requirement to construct alternative search engine URLs and deploy as a bookmarklet.
+- v3: The actual JavaScripts in action currently living in my browser bookmark are the following (v3.1 to Bing, v3.2 to DuckDuckGo)
+  - v3.1 javascript:(function(){const u=new URL(window.location.href);let q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('p')||u.searchParams.get('wd')||u.searchParams.get('text')||u.searchParams.get('search')||u.searchParams.get('s')||u.searchParams.get('term');if(!q){const h=u.hash;if(h){const p=new URLSearchParams(h.substring(1));q=p.get('q')||p.get('query')||p.get('p')||p.get('wd')||p.get('text')||p.get('search')||p.get('s')||p.get('term');}}if(q){const e=encodeURIComponent(q.trim());window.open('https://www.bing.com/search?q=%27+e,%27_blank%27);}else{alert(%27No search query found.%27);}})();
+  - v3.2 javascript:(function(){ const u = new URL(window.location.href); let q = u.searchParams.get('q') || u.searchParams.get('query') || u.searchParams.get('p') || u.searchParams.get('wd') || u.searchParams.get('text') || u.searchParams.get('search') || u.searchParams.get('s') || u.searchParams.get('term'); if (!q) { const h = u.hash; if (h) { const p = new URLSearchParams(h.substring(1)); q = p.get('q') || p.get('query') || p.get('p') || p.get('wd') || p.get('text') || p.get('search') || p.get('s') || p.get('term'); } } if (q) { const e = encodeURIComponent(q.trim()); const engines = [ 'https://duckduckgo.com/?q=%27, %27https://www.ecosia.org/search?q=%27, %27https://www.startpage.com/search?query=%27, %27https://www.bing.com/search?q=%27 ]; for (const url of engines) { window.open(url + e, %27_blank%27); break; } } else { alert(%27No search query found.%27); } })();
 
 ---
 
