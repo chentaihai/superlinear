@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine Switcher Bookmarklets</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .bookmarklet {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .bookmarklet:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+        .bookmarklet a {
+            display: inline-block;
+            background: #4a6fa5;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .bookmarklet a:hover {
+            background: #3a5a8c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #555;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background: #777;
+        }
+        .instructions {
+            background: #e8f4fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #7cb342;
+        }
+        .engine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .engine-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .engine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .engine-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .test-area {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Search Engine Switcher Bookmarklets</h1>
+        <p>Instantly switch your search query to another search engine with one click!</p>
+        
+        <div class="instructions">
+            <h3>📖 How to Install</h3>
+            <ol>
+                <li>Drag any of the links below to your browser's bookmarks bar</li>
+                <li>OR right-click the link and select "Bookmark Link"</li>
+                <li>When on any search results page (Google, Bing, etc.), click the bookmarklet</li>
+                <li>Your search will open in a new tab using the alternative search engine</li>
+            </ol>
+        </div>
+        
+        <h2>🔄 Default Switcher</h2>
+        <div class="bookmarklet">
+            <h3>Switch to Alternative Engine</h3>
+            <p>Opens the same search in a privacy-focused alternative (DuckDuckGo, Ecosia, Startpage, etc.)</p>
+            <a href="javascript:(function(){const u=new URL(window.location.href);let q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('p')||u.searchParams.get('wd')||u.searchParams.get('text')||u.searchParams.get('search')||u.searchParams.get('s')||u.searchParams.get('term');if(!q){const h=u.hash;if(h){const p=new URLSearchParams(h.substring(1));q=p.get('q')||p.get('query')||p.get('p')||p.get('wd')||p.get('text')||p.get('search')||p.get('s')||p.get('term');}}if(q){const e=encodeURIComponent(q.trim());const a=['https://duckduckgo.com/?q=','https://www.ecosia.org/search?q=','https://www.startpage.com/search?query=','https://www.bing.com/search?q='];for(const t of a){window.open(t+e,'_blank');break;}}else{alert('No search query found.');}})();">
+                🔄 Switch Search Engine
+            </a>
+            <p>Drag this link to your bookmarks bar</p>
+            <button class="copy-btn" onclick="copyCode('default')">Copy Code</button>
+            <div id="default-code" class="code-block">
+javascript:(function(){
+  const u = new URL(window.location.href);
+  let q = u.searchParams.get('q') || u.searchParams.get('query') || 
+          u.searchParams.get('p') || u.searchParams.get('wd') || 
+          u.searchParams.get('text') || u.searchParams.get('search') || 
+          u.searchParams.get('s') || u.searchParams.get('term');
+  
+  if (!q) {
+    const h = u.hash;
+    if (h) {
+      const p = new URLSearchParams(h.substring(1));
+      q = p.get('q') || p.get('query') || p.get('p') || p.get('wd') || 
+          p.get('text') || p.get('search') || p.get('s') || p.get('term');
+    }
+  }
+  
+  if (q) {
+    const e = encodeURIComponent(q.trim());
+    const engines = [
+      'https://duckduckgo.com/?q=',
+      'https://www.ecosia.org/search?q=',
+      'https://www.startpage.com/search?query=',
+      'https://www.bing.com/search?q='
+    ];
+    for (const url of engines) {
+      window.open(url + e, '_blank');
+      break;
+    }
+  } else {
+    alert('No search query found.');
+  }
+})();
+            </div>
+        </div>
+        
+        <h2>🎯 Specific Search Engines</h2>
+        <p>Click to install bookmarklets for specific search engines:</p>
+        
+        <div class="engine-grid">
+            <div class="engine-card">
+                <div class="engine-icon">🦆</div>
+                <h3>DuckDuckGo</h3>
+                <a href="javascript:(function(){const u=new URL(window.location.href);let q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('p')||u.searchParams.get('wd')||u.searchParams.get('text')||u.searchParams.get('search')||u.searchParams.get('s')||u.searchParams.get('term');if(!q){const h=u.hash;if(h){const p=new URLSearchParams(h.substring(1));q=p.get('q')||p.get('query')||p.get('p')||p.get('wd')||p.get('text')||p.get('search')||p.get('s')||p.get('term');}}if(q){const e=encodeURIComponent(q.trim());window.open('https://duckduckgo.com/?q='+e,'_blank');}else{alert('No search query found.');}})();">
+                    DuckDuckGo
+                </a>
+            </div>
+            
+            <div class="engine-card">
+                <div class="engine-icon">🌳</div>
+                <h3>Ecosia</h3>
+                <a href="javascript:(function(){const u=new URL(window.location.href);let q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('p')||u.searchParams.get('wd')||u.searchParams.get('text')||u.searchParams.get('search')||u.searchParams.get('s')||u.searchParams.get('term');if(!q){const h=u.hash;if(h){const p=new URLSearchParams(h.substring(1));q=p.get('q')||p.get('query')||p.get('p')||p.get('wd')||p.get('text')||p.get('search')||p.get('s')||p.get('term');}}if(q){const e=encodeURIComponent(q.trim());window.open('https://www.ecosia.org/search?q='+e,'_blank');}else{alert('No search query found.');}})();">
+                    Ecosia
+                </a>
+            </div>
+            
+            <div class="engine-card">
+                <div class="engine-icon">🔒</div>
+                <h3>Startpage</h3>
+                <a href="javascript:(function(){const u=new URL(window.location.href);let q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('p')||u.searchParams.get('wd')||u.searchParams.get('text')||u.searchParams.get('search')||u.searchParams.get('s')||u.searchParams.get('term');if(!q){const h=u.hash;if(h){const p=new URLSearchParams(h.substring(1));q=p.get('q')||p.get('query')||p.get('p')||p.get('wd')||p.get('text')||p.get('search')||p.get('s')||p.get('term');}}if(q){const e=encodeURIComponent(q.trim());window.open('https://www.startpage.com/search?query='+e,'_blank');}else{alert('No search query found.');}})();">
+                    Startpage
+                </a>
+            </div>
+            
+            <div class="engine-card">
+                <div class="engine-icon">🔍</div>
+                <h3>Google</h3>
+                <a href="javascript:(function(){const u=new URL(window.location.href);let q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('p')||u.searchParams.get('wd')||u.searchParams.get('text')||u.searchParams.get('search')||u.searchParams.get('s')||u.searchParams.get('term');if(!q){const h=u.hash;if(h){const p=new URLSearchParams(h.substring(1));q=p.get('q')||p.get('query')||p.get('p')||p.get('wd')||p.get('text')||p.get('search')||p.get('s')||p.get('term');}}if(q){const e=encodeURIComponent(q.trim());window.open('https://www.google.com/search?q='+e,'_blank');}else{alert('No search query found.');}})();">
+                    Google
+                </a>
+            </div>
+            
+            <div class="engine-card">
+                <div class="engine-icon">🧠</div>
+                <h3>Bing</h3>
+                <a href="javascript:(function(){const u=new URL(window.location.href);let q=u.searchParams.get('q')||u.searchParams.get('query')||u.searchParams.get('p')||u.searchParams.get('wd')||u.searchParams.get('text')||u.searchParams.get('search')||u.searchParams.get('s')||u.searchParams.get('term');if(!q){const h=u.hash;if(h){const p=new URLSearchParams(h.substring(1));q=p.get('q')||p.get('query')||p.get('p')||p.get('wd')||p.get('text')||p.get('search')||p.get('s')||p.get('term');}}if(q){const e=encodeURIComponent(q.trim());window.open('https://www.bing.com/search?q='+e,'_blank');}else{alert('No search query found.');}})();">
+                    Bing
+                </a>
+            </div>
+        </div>
+        
+        <div class="note">
+            <h3>⚠️ Important Notes</h3>
+            <ul>
+                <li>Works on most search engines: Google, Bing, Yahoo, DuckDuckGo, Baidu, Yandex, etc.</li>
+                <li>Must be on a search results page (URL contains search parameters like ?q=, ?p=, etc.)</li>
+                <li>Some browsers may block pop-ups; allow pop-ups for the current site if needed</li>
+                <li>Tested on Chrome, Firefox, Safari, and Edge</li>
+            </ul>
+        </div>
+        
+        <h2>🧪 Test Area</h2>
+        <div class="test-area">
+            <p>Try the bookmarklet functionality on this simulated search page:</p>
+            <button onclick="simulateGoogleSearch()">Simulate Google Search</button>
+            <button onclick="simulateBingSearch()">Simulate Bing Search</button>
+            <button onclick="simulateDuckDuckGoSearch()">Simulate DuckDuckGo Search</button>
+            <div id="test-result" style="margin-top: 20px;"></div>
+        </div>
+        
+        <div class="feature-list">
+            <div class="feature-item">
+                <h4>🔧 Customizable</h4>
+                <p>Edit the bookmarklet URL to change the target search engine</p>
+            </div>
+            <div class="feature-item">
+                <h4>⚡ Fast Switching</h4>
+                <p>One-click switching between search engines</p>
+            </div>
+            <div class="feature-item">
+                <h4>🌐 Universal</h4>
+                <p>Works with most search engines and query parameters</p>
+            </div>
+            <div class="feature-item">
+                <h4>🔒 Privacy</h4>
+                <p>Quickly switch to privacy-focused search engines</p>
+            </div>
+        </div>
+        
+        <h2>📚 Advanced Usage</h2>
+        <div class="code-block">
+// Use the full library in your own scripts
+&lt;script src="extractSearchQuery.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Get current search query
+  const query = getSearchQuery();
+  
+  // Construct URL for a specific engine
+  const duckduckgoUrl = constructSearchUrl('duckduckgo', query);
+  
+  // Open in new tab
+  window.open(duckduckgoUrl, '_blank');
+&lt;/script&gt;
+        </div>
+    </div>
+
+    <script>
+        function copyCode(id) {
+            const codeBlock = document.getElementById(id + '-code');
+            const text = codeBlock.textContent.trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        function simulateGoogleSearch() {
+            window.history.pushState({}, '', '/?q=test+search+query&hl=en');
+            document.getElementById('test-result').innerHTML = 
+                '<div class="instructions">Simulated Google search page. Try the bookmarklets above!</div>';
+        }
+        
+        function simulateBingSearch() {
+            window.history.pushState({}, '', '/?q=another+test+query&form=QBLH');
+            document.getElementById('test-result').innerHTML = 
+                '<div class="instructions">Simulated Bing search page. Try the bookmarklets above!</div>';
+        }
+        
+        function simulateDuckDuckGoSearch() {
+            window.history.pushState({}, '', '/?q=privacy+search&t=h_');
+            document.getElementById('test-result').innerHTML = 
+                '<div class="instructions">Simulated DuckDuckGo search page. Try the bookmarklets above!</div>';
+        }
+        
+        // Initialize copy buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.copy-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const id = this.getAttribute('onclick').match(/copyCode\('(\w+)'\)/)[1];
+                    copyCode(id);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
