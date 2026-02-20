@@ -442,6 +442,7 @@ def save_metadata(image_urls, post_urls, output_dir):
     logger.info(f"Metadata saved to: {metadata_file}")
     return metadata_file
 
+
 def main():
     parser = argparse.ArgumentParser(description='Download images from Instagram profile (Enhanced Version)')
     parser.add_argument('profile_url', help='Instagram profile URL (e.g., https://www.instagram.com/username/)')
