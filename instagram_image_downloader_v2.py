@@ -512,6 +512,30 @@ def main():
             if not login_successful:
                 logger.warning("Login verification failed. Proceeding anyway...")
         
+        # Ensure we're on the target profile page before extraction
+        # Instagram might redirect to homepage after login or for other reasons
+        current_url = driver.current_url
+        target_url = args.profile_url
+        
+        # Extract username from profile URL for comparison
+        username_match = re.search(r'instagram\.com/([^/?#]+)', target_url)
+        if username_match:
+            target_username = username_match.group(1)
+            
+            # Check if current URL contains the target username
+            # Also check if we're on Instagram homepage (instagram.com without username)
+            if target_username not in current_url:
+                logger.info(f"Not on target profile page. Current URL: {current_url}")
+                logger.info(f"Navigating to target profile: {target_url}")
+                driver.get(target_url)
+                time.sleep(5)  # Wait for page load
+                
+                # Verify we're now on the correct page
+                new_url = driver.current_url
+                if target_username not in new_url:
+                    logger.warning(f"Still not on target profile page after navigation. URL: {new_url}")
+                    logger.warning("Proceeding anyway, but extraction may fail...")
+        
         # Extract image URLs and post links
         logger.info("Starting image extraction...")
         image_urls, post_urls = extract_all_image_urls(
