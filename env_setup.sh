@@ -19,9 +19,9 @@ else
     fi
 fi
 
-# Verify API_KEY is set
-if [ -z "$API_KEY" ]; then
-    echo "⚠️  API_KEY is not set. Please add it to .env file or export manually."
+# Verify GEMINI_API_KEY is set
+if [ -z "$GEMINI_API_KEY" ]; then
+    echo "⚠️  GEMINI_API_KEY is not set. Please add it to .env file or export manually."
 else
-    echo "✅ API_KEY is set (first 8 chars: ${API_KEY:0:8}...)"
+    echo "✅ GEMINI_API_KEY is set (first 8 chars: ${GEMINI_API_KEY:0:8}...)"
 fi
